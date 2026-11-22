@@ -2,97 +2,102 @@
 """
 Proyecto: Software FJ
 Archivo: main.py
-Descripción: Pruebas de los servicios especializados.
+Descripción: Pruebas iniciales del módulo de reservas.
 """
 
-from servicio import (
-    ReservaSala,
-    AlquilerEquipo,
-    AsesoriaEspecializada
-)
+from cliente import Cliente
+from servicio import ReservaSala, AlquilerEquipo
+from reserva import Reserva
+from excepciones import SoftwareFJError
 
 print("======================================")
 print("       SISTEMA SOFTWARE FJ")
-print("       PRUEBAS DE SERVICIOS")
+print("       PRUEBAS DE RESERVAS")
 print("======================================")
 
-# PRUEBA 1: Crear una reserva de sala.
-print("\nPRUEBA 1: Reserva de sala")
+# Creamos un cliente.
+cliente1 = Cliente(
+    "Juan Carlos Pérez",
+    "1234567890",
+    "juancarlos@gmail.com",
+    "3001234567"
+)
+
+# Creamos dos servicios.
+sala = ReservaSala("Sala principal", 50000, 20)
+equipos = AlquilerEquipo("Proyectores", 30000, 5)
+
+
+# PRUEBA 1: Crear una reserva.
+print("\nPRUEBA 1: Crear reserva")
 
 try:
-    sala = ReservaSala("Sala de reuniones", 50000, 20)
+    reserva1 = Reserva(cliente1, sala, 2, asistentes=10)
+    print("Reserva creada correctamente.")
+    print(reserva1.describir())
 
-    print(sala.describir())
-
-    costo = sala.calcular_costo(2)
-    print("Costo por 2 horas:", costo)
-
-except ValueError as error:
+except SoftwareFJError as error:
     print("Error:", error)
 
 
-# PRUEBA 2: Crear un alquiler de equipos.
-print("\nPRUEBA 2: Alquiler de equipos")
+# PRUEBA 2: Confirmar la reserva.
+print("\nPRUEBA 2: Confirmar reserva")
 
 try:
-    equipo = AlquilerEquipo("Proyectores", 30000, 10)
+    print(reserva1.confirmar())
+    print("Estado:", reserva1.estado)
 
-    print(equipo.describir())
-
-    costo = equipo.calcular_costo(3, unidades=2)
-    print("Costo por 3 horas y 2 equipos:", costo)
-
-except ValueError as error:
+except SoftwareFJError as error:
     print("Error:", error)
 
 
-# PRUEBA 3: Crear una asesoría especializada.
-print("\nPRUEBA 3: Asesoría especializada")
+# PRUEBA 3: Procesar la reserva.
+print("\nPRUEBA 3: Procesar reserva")
 
 try:
-    asesoria = AsesoriaEspecializada(
-        "Asesoría tecnológica",
-        80000,
-        "Desarrollo de software"
-    )
+    costo = reserva1.procesar(impuesto=19)
+    print("Costo final:", costo)
+    print("Estado:", reserva1.estado)
 
-    print(asesoria.describir())
-
-    costo = asesoria.calcular_costo(
-        2,
-        impuesto=19,
-        descuento=10,
-        modalidad="virtual"
-    )
-
-    print("Costo con impuesto y descuento:", costo)
-
-except ValueError as error:
+except SoftwareFJError as error:
     print("Error:", error)
 
 
-# PRUEBA 4: Intentar reservar una sala con demasiados asistentes.
-print("\nPRUEBA 4: Validación de capacidad")
+# PRUEBA 4: Intentar cancelar una reserva procesada.
+print("\nPRUEBA 4: Cancelar reserva procesada")
 
 try:
-    sala.calcular_costo(2, asistentes=30)
+    reserva1.cancelar()
 
-except ValueError as error:
+except SoftwareFJError as error:
     print("Error controlado:", error)
 
 
-# PRUEBA 5: Intentar alquilar más equipos de los disponibles.
-print("\nPRUEBA 5: Validación de disponibilidad")
+# PRUEBA 5: Intentar crear una reserva con duración inválida.
+print("\nPRUEBA 5: Duración incorrecta")
 
 try:
-    equipo.calcular_costo(2, unidades=15)
+    reserva2 = Reserva(cliente1, equipos, -3, unidades=2)
 
-except ValueError as error:
+except SoftwareFJError as error:
     print("Error controlado:", error)
+
+
+# PRUEBA 6: Crear y cancelar una reserva pendiente.
+print("\nPRUEBA 6: Cancelar reserva pendiente")
+
+try:
+    reserva3 = Reserva(cliente1, equipos, 2, unidades=2)
+
+    print(reserva3.cancelar())
+    print("Estado:", reserva3.estado)
+
+except SoftwareFJError as error:
+    print("Error:", error)
 
 
 print("\n======================================")
-print("FINALIZARON LAS PRUEBAS DE SERVICIOS")
-print("El programa continúa funcionando.")
+print("FINALIZARON LAS PRUEBAS DE RESERVAS")
+print("EL SISTEMA CONTINÚA FUNCIONANDO")
 print("======================================")
 
