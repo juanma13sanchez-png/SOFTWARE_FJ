@@ -1,0 +1,43 @@
+2026-11-22 11:05:27,440 | INFO | Sistema Software FJ iniciado.
+2026-11-22 11:05:27,441 | INFO | Cliente registrado: 1234567890
+2026-11-22 11:05:27,441 | ERROR | Error al registrar cliente.
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\sistema.py", line 81, in registrar_cliente
+    raise ValidacionError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ValidacionError: Ya existe un cliente con ese documento.
+2026-11-22 11:05:27,446 | INFO | Servicio registrado: Sala principal
+2026-11-22 11:05:27,446 | INFO | Servicio registrado: Proyectores
+2026-11-22 11:05:27,447 | INFO | Servicio registrado: Asesoría tecnológica
+2026-11-22 11:05:27,447 | ERROR | Error al registrar servicio.
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\sistema.py", line 117, in registrar_servicio
+    raise ValidacionError(
+        "Ya existe un servicio con ese nombre."
+    )
+excepciones.ValidacionError: Ya existe un servicio con ese nombre.
+2026-11-22 11:05:27,448 | INFO | Reserva creada: dfaeb087-1c0d-4712-ac06-45b5b4e951d9
+2026-11-22 11:05:27,448 | INFO | Reserva confirmada: dfaeb087-1c0d-4712-ac06-45b5b4e951d9
+2026-11-22 11:05:27,448 | INFO | Reserva procesada: dfaeb087-1c0d-4712-ac06-45b5b4e951d9 | Costo: 119000.00
+2026-11-22 11:05:27,449 | ERROR | Error al cancelar reserva.
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\sistema.py", line 226, in cancelar_reserva
+    resultado = reserva.cancelar()
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\reserva.py", line 133, in cancelar
+    raise EstadoReservaError(
+        "No se puede cancelar una reserva procesada o cancelada."
+    )
+excepciones.EstadoReservaError: No se puede cancelar una reserva procesada o cancelada.
+2026-11-22 11:05:27,450 | ERROR | Error al crear reserva.
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\sistema.py", line 161, in crear_reserva
+    nueva_reserva = Reserva(
+        cliente,
+    ...<2 lines>...
+        **parametros
+    )
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\reserva.py", line 58, in __init__
+    raise ValidacionError("La duración debe ser mayor que cero.")
+excepciones.ValidacionError: La duración debe ser mayor que cero.
+2026-11-22 11:05:27,453 | INFO | Consulta del resumen general.
