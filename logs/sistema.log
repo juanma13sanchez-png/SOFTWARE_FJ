@@ -41,3 +41,38 @@ Traceback (most recent call last):
     raise ValidacionError("La duración debe ser mayor que cero.")
 excepciones.ValidacionError: La duración debe ser mayor que cero.
 2026-11-22 11:05:27,453 | INFO | Consulta del resumen general.
+2026-11-22 11:08:49,316 | ERROR | Error detectado en prueba 1.
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\pruebas_excepciones.py", line 39, in <module>
+    cliente = Cliente(
+        "Juan Pérez",
+    ...<2 lines>...
+        "3001234567"
+    )
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\cliente.py", line 32, in __init__
+    self.__documento = self.__validar_documento(documento)
+                       ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\cliente.py", line 58, in __validar_documento
+    raise ValueError("El documento debe contener solamente números.")
+ValueError: El documento debe contener solamente números.
+2026-11-22 11:08:49,326 | INFO | Cliente creado en prueba 2.
+2026-11-22 11:08:49,326 | ERROR | Error detectado en prueba 3.
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\pruebas_excepciones.py", line 78, in <module>
+    resultado = 10 / 0
+                ~~~^~~
+ZeroDivisionError: division by zero
+2026-11-22 11:08:49,327 | ERROR | Error detectado en prueba 4.
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\pruebas_excepciones.py", line 95, in <module>
+    numero = int("Software FJ")
+ValueError: invalid literal for int() with base 10: 'Software FJ'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Usuario\OneDrive\Desktop\SOFTWARE_FJ\pruebas_excepciones.py", line 98, in <module>
+    raise ValidacionError(
+        "No fue posible convertir el dato a número."
+    ) from error
+excepciones.ValidacionError: No fue posible convertir el dato a número.
